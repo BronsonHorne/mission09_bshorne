@@ -1,0 +1,25 @@
+﻿@{
+    
+}
+@model BooksVM
+<h1>Spencer Hilton/'s Book Store</h1>
+
+@foreach (Book x in Model.Books)
+{
+    <h3>@x.Title</h3>
+
+    <ul>
+        <li>Author: @x.Author</li>
+        <li>Publisher: @x.Publisher</li>
+        <li>Isbn: @x.Isbn</li>
+        <li>Classification: @x.Classification</li>
+        <li>Category: @x.Category</li>
+        <li>Number of Pages: @x.PageCount</li>
+        <li>Price: @x.Price</li>
+    </ul>
+
+    <br />
+}
+
+<div page-model="@Model.PageInfo" page-action="Index"></div>
+
