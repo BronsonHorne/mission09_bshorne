@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace mission09_bshorne.infrastructure
 {
-    [HtmlTargetElement("div",Attributes = "page-model")]
+    [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageTagHelper : TagHelper
     {
         //Create Page Links
@@ -26,7 +26,10 @@ namespace mission09_bshorne.infrastructure
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext vc { get; set; }
-
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
 
         public PageInformation PageModel { get; set; }
         public string PageAction { get; set; }
@@ -37,11 +40,17 @@ namespace mission09_bshorne.infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = 1; i < PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageModel.CurrentPage
+                    ? PageClassSelected : PageClassNormal);
+                }
                 tb.InnerHtml.Append(i.ToString());
 
 
