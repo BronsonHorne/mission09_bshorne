@@ -18,20 +18,24 @@ namespace mission09_bshorne.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string bookType, int pageNum = 1)
         {
             int perPage = 10;
 
             var b = new BooksVM
             {
                 Books = repo.Books
+                .Where(b => b.Category == bookType | bookType == null)
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * perPage)
                 .Take(perPage),
 
                 PageInfo = new PageInformation
                 {
-                    TotalBooks = repo.Books.Count(),
+                    TotalBooks = 
+                    (bookType == null 
+                    ? repo.Books.Count() 
+                    : repo.Books.Where(x => x.Category == bookType).Count()),
                     BooksPerPage = perPage,
                     CurrentPage = pageNum
                 }

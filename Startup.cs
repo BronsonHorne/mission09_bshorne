@@ -34,6 +34,8 @@ namespace mission09_bshorne
             });
 
             services.AddScoped<ILibraryRepository, EFLibraryRepository>();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,10 +49,24 @@ namespace mission09_bshorne
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //Endpoint order matters :)
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "typepage",
+                    pattern: "{bookType}/Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapControllerRoute("type", "{projectType}", new { Controller = "Home", action = "Index", pageNum = 1 });
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

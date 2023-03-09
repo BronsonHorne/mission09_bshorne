@@ -16,8 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\bootstrap\" />
-  </ItemGroup>
-
 </Project>
