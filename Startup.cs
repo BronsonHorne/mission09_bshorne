@@ -36,6 +36,9 @@ namespace mission09_bshorne
             services.AddScoped<ILibraryRepository, EFLibraryRepository>();
 
             services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +50,7 @@ namespace mission09_bshorne
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             //Endpoint order matters :)
             app.UseEndpoints(endpoints =>

@@ -3,3 +3,46 @@
 @{
 }
 
+<h2>Your Cart</h2>
+<style>
+    a:hover {
+        color: #273c75;
+        background-color: #8db4f7;
+    }
+</style>
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var i in Model.basket.Items)
+            {
+                <tr>
+                    <td>@i.Book.Title</td>
+                    <td>@i.Quantity</td>
+                    <td>@i.Book.Price</td>
+                    <td>@(i.Quantity*i.Book.Price)</td>
+                </tr>
+            }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+
+</table>
+<!--CHANGE 1/2 IS CHANGING THE FADE EFFECT ON THIS BUTTON-->
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl"onmouseover="this.style.backgroundColor='#C9F5D9';this.style.color='#aaaaaa'"
+   onmouseout="this.style.backgroundColor='#0275d8';this.style.color='#f7f7f7'">Continue Shopping</a>
+</div>

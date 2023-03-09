@@ -13,11 +13,13 @@
     <form method="post" asp-page="/Shop">
 
         <input type="hidden" asp-for="@Model.BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
 
         <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-right">Add to Card</button>
+            <button type="submit" class="btn btn-success btn-sm float-right">Add to Cart</button>
         </span>
-
+        <!--Bootstrap 2/2 having a reaccuring IMG with Style applied-->
+        <img height="200" style="outline-style:solid; outline-width:thin; outline-color:black;" src="~/unnamed.png" />
     </form>
 </div>
 <ul>
