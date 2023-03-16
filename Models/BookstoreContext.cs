@@ -20,6 +20,7 @@ namespace mission09_bshorne.Models
         }
 
         public virtual DbSet<Book> Books { get; set; }
+        public DbSet<Checkout> Checkout { get; set; }
 
     }
 }
